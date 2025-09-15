@@ -4,7 +4,7 @@ cartes = {'Deux': 2, 'Trois': 3, 'Quatre': 4, 'Cinq': 5, 'Six': 6, 'Sept': 7, 'H
           'Dix': 10, 'Valet': 10, 'Dame': 10, 'Roi': 10, 'As': 11}
 couleurs = ['Coeur', 'Carreau', 'Trèfle', 'Pique']
 
-MISE_FIXE = 10  # choix cohérent
+MISE_FIXE = 10  
 
 class Carte:
     def __init__(self, valeur, couleur):
@@ -78,7 +78,6 @@ class Blackjack:
             self.main_croupier.append(self.cartes.pop())
 
     def resultat(self):
-        # révéler les deux mains
         self.afficher_main('joueur', reveler=True)
         self.afficher_main('croupier', reveler=True)
 
@@ -106,12 +105,12 @@ class Blackjack:
             print(f"Égalité. Solde: {self.solde_joueur} $")
 
 def jouer_blackjack():
-    jeu = Blackjack()  # <-- créé une seule fois
+    jeu = Blackjack()  
     while True:
-        jeu.reset_manche()  # <-- on réinitialise la manche
+        jeu.reset_manche()  
         jeu.distribuer_cartes()
         jeu.afficher_main('joueur')
-        jeu.afficher_main('croupier')  # carte cachée visible seulement ici
+        jeu.afficher_main('croupier')  
 
         if jeu.tour_joueur() != 'perdu':
             print("C'est au tour du croupier.")
