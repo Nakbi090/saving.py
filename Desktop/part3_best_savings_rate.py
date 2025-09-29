@@ -1,6 +1,5 @@
 ### EXERCICE 1
 
-
 def main():
     annual_salary = float(input("Enter your annual salary in Lyon: "))
     portion_saved = float(input("Enter the portion of salary to be saved, as a decimal: "))
@@ -22,10 +21,47 @@ def main():
 
     print(f"Number of months: {months}")
 
+if __name__ == "__main__":
+    main()
 
+
+
+###EXERCICE 2
+
+
+def main():
+    r = 0.04
+    portion_down_payment = 0.25
+
+    annual_salary = float(input("Enter your starting annual salary in Lyon: "))
+    portion_saved = float(input("Enter the portion of salary to be saved, as a decimal: "))
+    total_cost = float(input("Enter the cost of your dream home in Lyon: "))
+    semi_annual_raise = float(input("Enter the semi-annual raise, as a decimal: "))
+
+    down_payment = portion_down_payment * total_cost
+    monthly_return = r / 12.0
+
+    current_savings = 0.0
+    months = 0
+    monthly_salary = annual_salary / 12.0
+
+    while current_savings < down_payment:
+        current_savings += current_savings * monthly_return
+        current_savings += portion_saved * monthly_salary
+        months += 1
+
+        if months % 6 == 0:
+            annual_salary *= (1.0 + semi_annual_raise)
+            monthly_salary = annual_salary / 12.0
+
+    print(f"Number of months: {months}")
+
+if __name__ == "__main__":
+    main()
 
 
 ### EXERCICE 3
+
 
 def months_to_save(annual_salary, savings_rate, months=36, r=0.04, semi_annual_raise=0.07):
     """Simulate savings over a fixed number of months with semi-annual raises."""
@@ -71,7 +107,9 @@ def main():
             break
 
         if saved < target:
-            low = mid 
+            low = mid  
+        else:
+            high = mid  
 
         if high - low < 1e-7:
             best_rate = mid
