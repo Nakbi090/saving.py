@@ -15,20 +15,18 @@ def months_to_save(annual_salary, savings_rate, months=36, r=0.04, semi_annual_r
 def main():
     portion_down_payment = 0.25
     total_cost = 1_000_000.0
-    target = portion_down_payment * total_cost  # €250,000
-    epsilon = 100.0  # tolerance
+    target = portion_down_payment * total_cost  
+    epsilon = 100.0  
     r = 0.04
     semi_annual_raise = 0.07
 
     starting_salary = float(input("Enter the starting salary in Lyon: "))
 
-    # Quick feasibility check: even saving 100% may not be enough
     max_savings = months_to_save(starting_salary, 1.0, 36, r, semi_annual_raise)
     if max_savings < target - epsilon:
         print("It is not possible to pay the down payment in three years.")
         return
 
-    # Bisection search on savings rate in [0.0, 1.0]
     low = 0.0
     high = 1.0
     steps = 0
@@ -44,11 +42,8 @@ def main():
             break
 
         if saved < target:
-            low = mid  # need to save more → raise the rate
-        else:
-            high = mid  # saving too much → lower the rate
+            low = mid 
 
-        # Safety: stop if interval is extremely small
         if high - low < 1e-7:
             best_rate = mid
             break
